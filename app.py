@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from battle_fetch import recBattles
+from sample_output import sample_output
 
 api_key = ''
 
@@ -7,8 +8,8 @@ app = Flask(__name__)
 
 def get_battle_info(player_tag):
     global recent_battles
-    rb = recBattles(api_key, player_tag)
-    recent_battles = rb.recent_battles()
+    # rb = recBattles(api_key, player_tag)
+    recent_battles = sample_output
     
     battles_info = []
     
