@@ -6,8 +6,22 @@
     <title>Recent Battles</title>
 </head>
 <body>
-    <h1>Analysis Result</h1>
-    <p>{{ analysis_result }}</p>
+    <h1>Recent Games Result</h1>
+    <h2>Analysis Games</h2>
+    
+    <button id="analyze-button">Analyze</button>
+    <div id="analysis-result"></div>
+
+    <script>
+        document.getElementById('analyze-button').addEventListener('click', function() {
+            fetch('/analyze')
+                .then(response => response.text())
+                .then(result => {
+                    document.getElementById('analysis-result').innerText = result;
+                });
+        });
+    </script>
+
     <h2>Recent Battles</h2>
     {% for battle in battles %}
         <div>

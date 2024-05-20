@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from battle_fetch import recBattles
-from analysis import analyze_battles
 
-api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6Ijk2MDVlMGM0LTU1NWMtNGZkNS1iZTU2LTBlZTc4YjBmMjc1YyIsImlhdCI6MTcxNDk2OTUwOSwic3ViIjoiZGV2ZWxvcGVyLzc0NTYzNDA3LWZhMTQtMmQyNS0xYTIzLTMwM2Y5YWI1NTQxYyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzIuODguNzIuMTA4Il0sInR5cGUiOiJjbGllbnQifV19.QPzzbfp09HCdLTZgOzwhpoj5SRRl4r-fy2EF044pZGvCpblWoBVEKe-GWXtygo1zk1ryq0jadXxB9kmaMfETSw'
+api_key = ''
 
 app = Flask(__name__)
 
@@ -43,19 +42,26 @@ def get_battle_info(player_tag):
     
     return battles_info
 
+@app.route('/analyze', methods=['GET'])
+def analyze():
+    # Perform analysis here
+    
+    analysis_result = ""
+    return jsonify({'analysis_result': analysis_result})
+
 @app.route('/', methods=['GET'])
 def index():
-    
 
     return render_template('index.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
 def submit():
     player_tag = request.form['player_tag']
     battles_info = get_battle_info(player_tag)
-    analysis_result = analyze_battles(recent_battles)
-    return render_template('battles.html', battles=battles_info, analysis_result=analysis_result)
+    return render_template('battles.html', battles=battles_info)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

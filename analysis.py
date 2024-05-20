@@ -1,37 +1,58 @@
-import openai
-from battle_fetch import recBattles
+"""
+Install the Google AI Python SDK
 
-# Set your OpenAI API key
-openai.api_key = 'sk-proj-idVk1xalB2iTO46UcOYvT3BlbkFJL4KwhQMd99sX0rXS3xey'
+$ pip install google-generativeai
 
-def analyze_battles(battles):
-    cards_won_against = []
-    cards_lost_against = []
+See the getting started guide for more information:
+https://ai.google.dev/gemini-api/docs/get-started/python
+"""
 
-    for battle in battles:
-        team_win_status = battle["team"]["win_status"]
-        opponent_deck = battle["opponent"]["deck"]
+import os
 
-        if team_win_status == "win":
-            cards_won_against.extend(card["name"] for card in opponent_deck)
-        else:
-            cards_lost_against.extend(card["name"] for card in opponent_deck)
-    
-    cards_won_against_freq = {card: cards_won_against.count(card) for card in set(cards_won_against)}
-    cards_lost_against_freq = {card: cards_lost_against.count(card) for card in set(cards_lost_against)}
+import google.generativeai as genai
 
-    prompt = f"Analyze the following data:\n\nCards the player frequently won against:\n{cards_won_against_freq}\n\nCards the player frequently lost against:\n{cards_lost_against_freq}\n\nProvide a summary of which cards the player is strong or weak against and suggest improvements."
+genai.configure(api_key=[""])
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=150
-    )
-    return "This is the analysis result."
-    return response['choices'][0]['message']['content'].strip()
+# Create the model
+# See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
+generation_config = {
+  "temperature": 1,
+  "top_p": 0.95,
+  "top_k": 64,
+  "max_output_tokens": 8192,
+  "response_mime_type": "text/plain",
+}
+safety_settings = [
+  {
+    "category": "HARM_CATEGORY_HARASSMENT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE",
+  },
+  {
+    "category": "HARM_CATEGORY_HATE_SPEECH",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE",
+  },
+  {
+    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE",
+  },
+  {
+    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE",
+  },
+]
 
-# Fetch recent battles
+model = genai.GenerativeModel(
+  model_name="gemini-1.5-flash-latest",
+  safety_settings=safety_settings,
+  generation_config=generation_config,
+)
 
+chat_session = model.start_chat(
+  history=[
+  ]
+)
+
+response = chat_session.send_message("hello how are u doing")
+
+print(response.text)
+print(chat_session.history)
