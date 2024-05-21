@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recent Battles</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='battles.css') }}">
 </head>
 <body>
     <h1>Recent Games Result</h1>
@@ -25,26 +26,32 @@
     <h2>Recent Battles</h2>
     {% for battle in battles %}
         <div>
+            <h3>👑{{ battle.player_crowns }}  -  {{ battle.player_crowns }}👑</h3>
             <h3>{{ battle.player }} vs {{ battle.opponent }}</h3>
             <p>Winner: {{ battle.winner }}</p>
-            <p>{{ battle.player }} Crowns: {{ battle.player_crowns }}</p>
-            <p>{{ battle.opponent }} Crowns: {{ battle.opponent_crowns }}</p>
+            <p></p>
             <div>
                 <h4>{{ battle.player }}'s Deck:</h4>
-                <div style="display: flex; flex-wrap: wrap;">
-                    {% for card_url in battle.player_deck %}
-                        <img src="{{ card_url }}" alt="Card Image" style="width: 50px; height: 50px; margin: 5px;">
-                    {% endfor %}
+                <div class="card-deck">
+                  {% for card_url in battle.player_deck %}
+                  <div class="card-container">
+                    <img src="{{ card_url }}" alt="Card Image">
+                  </div>
+                  {% endfor %}
                 </div>
-            </div>
-            <div>
+                <div>
+                    <img src="https://api-assets.clashroyale.com/cards/300/c1rL3LO1U2D9-TkeFfAC18gP3AO8ztSwrcHMZplwL2Q.png" alt="">
+                </div>
+              </div>
+              <div>
                 <h4>{{ battle.opponent }}'s Deck:</h4>
-                <div style="display: flex; flex-wrap: wrap;">
-                    {% for card_url in battle.opponent_deck %}
-                        <img src="{{ card_url }}" alt="Card Image" style="width: 50px; height: 50px; margin: 5px;">
-                    {% endfor %}
+                <div class="card-deck">
+                  {% for card_url in battle.opponent_deck %}
+                  <div class="card-container">
+                    <img src="{{ card_url }}" alt="Card Image">
+                  </div>
+                  {% endfor %}
                 </div>
-            </div>
         </div>
         <hr>
     {% endfor %}
