@@ -53,6 +53,7 @@ class recBattles:
                 "team": {
                     "name": team_name,
                     "tag": team[0]["tag"],
+                    "startingTrophies": team[0]["startingTrophies"], 
                     "win_status": team_win,
                     "crowns": team[0]["crowns"],
                     "deck": [],
@@ -60,6 +61,7 @@ class recBattles:
                 "opponent": {
                     "name": opponent_name,
                     "tag": opponent[0]["tag"],
+                    "startingTrophies": opponent[0]["startingTrophies"], 
                     "win_status": opponent_win,
                     "crowns": opponent[0]["crowns"],
                     "deck": [],

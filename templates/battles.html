@@ -26,27 +26,47 @@
     <h2>Recent Battles</h2>
     {% for battle in battles %}
         <div>
-            <h3>👑{{ battle.player_crowns }}  -  {{ battle.player_crowns }}👑</h3>
-            <h3>{{ battle.player }} vs {{ battle.opponent }}</h3>
+            <h3>👑{{ battle.player_crowns }}  -  {{ battle.opponent_crowns }}👑</h3>
+            <div class="name-trophies-container">
+              <div class="battle">
+                <span>{{ battle.player }}</span>
+                <span>vs</span>
+                <span>{{ battle.opponent }}</span>
+              </div>
+              <div class="scores">
+                <span>{{ battle.player_trophies }}🏆</span><span>{{ battle.opponent_trophies }}🏆</span>
+              </div> 
+            </div>
             <p>Winner: {{ battle.winner }}</p>
             <p></p>
             <div>
                 <h4>{{ battle.player }}'s Deck:</h4>
                 <div class="card-deck">
-                  {% for card_url in battle.player_deck %}
+                  {% for card_url in battle.player_deck1 %}
                   <div class="card-container">
                     <img src="{{ card_url }}" alt="Card Image">
                   </div>
                   {% endfor %}
                 </div>
-                <div>
-                    <img src="https://api-assets.clashroyale.com/cards/300/c1rL3LO1U2D9-TkeFfAC18gP3AO8ztSwrcHMZplwL2Q.png" alt="">
+                <div class="card-deck">
+                  {% for card_url in battle.player_deck2 %}
+                  <div class="card-container">
+                    <img src="{{ card_url }}" alt="Card Image">
+                  </div>
+                  {% endfor %}
                 </div>
               </div>
               <div>
                 <h4>{{ battle.opponent }}'s Deck:</h4>
                 <div class="card-deck">
-                  {% for card_url in battle.opponent_deck %}
+                  {% for card_url in battle.opponent_deck1 %}
+                  <div class="card-container">
+                    <img src="{{ card_url }}" alt="Card Image">
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="card-deck">
+                  {% for card_url in battle.opponent_deck2 %}
                   <div class="card-container">
                     <img src="{{ card_url }}" alt="Card Image">
                   </div>

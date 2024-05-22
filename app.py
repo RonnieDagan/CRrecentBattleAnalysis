@@ -18,6 +18,8 @@ def get_battle_info(player_tag):
         opponent = battle["opponent"]["name"]
         winner = player if battle["team"]["win_status"] == "win" else opponent
         player_crowns = battle["team"]["crowns"]
+        player_trophies = battle["team"]["startingTrophies"]
+        opponent_trophies = battle["opponent"]["startingTrophies"]
         opponent_crowns = battle["opponent"]["crowns"]
         
         player_deck = []
@@ -34,9 +36,15 @@ def get_battle_info(player_tag):
             "opponent": opponent,
             "winner": winner,
             "player_crowns": player_crowns,
+            "player_trophies": player_trophies,
+            "opponent_trophies": opponent_trophies,
             "opponent_crowns": opponent_crowns,
             "player_deck": player_deck,
-            "opponent_deck": opponent_deck
+            "player_deck1": player_deck[0:4],
+            "player_deck2": player_deck[4:9],
+            "opponent_deck": opponent_deck,
+            "opponent_deck1": opponent_deck[0:4],
+            "opponent_deck2": opponent_deck[4:9],
         }
         
         battles_info.append(battle_info)
@@ -65,4 +73,4 @@ def submit():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=3000)

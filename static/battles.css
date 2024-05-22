@@ -5,6 +5,10 @@ body {
     text-align: center;
   }
   
+  h1{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
   h1, h2, h3, h4 {
     color: #333;
     margin-bottom: 10px;
@@ -18,11 +22,21 @@ body {
     border-radius: 4px;
     cursor: pointer;
   }
+  .scores {
+    text-align: center;
+  }
+  
+  .scores span {
+    display: inline-block;
+    margin-right: 40px; /* Adjust the spacing as needed */
+    margin-left: 40px;
+  }
+  
   
   button:hover {
     background-color: #45a049;
   }
-  
+
   .card-deck {
     display: flex;
     flex-wrap: wrap;
@@ -31,10 +45,6 @@ body {
   }
   
   .card-container {
-    width: 60px;
-    height: 60px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
     margin: 5px;
     display: flex;
     justify-content: center;
