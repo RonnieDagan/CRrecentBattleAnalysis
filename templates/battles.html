@@ -29,9 +29,9 @@
             <h3>👑{{ battle.player_crowns }}  -  {{ battle.opponent_crowns }}👑</h3>
             <div class="name-trophies-container">
               <div class="battle">
-                <span>{{ battle.player }}</span>
+                <span><a href="/{{ battle.player_tag }}">{{ battle.player }} </a></span>
                 <span>vs</span>
-                <span>{{ battle.opponent }}</span>
+                <span><a href="/{{ battle.opponent_tag }}">{{ battle.opponent }}</a></span>
               </div>
               <div class="scores">
                 <span>{{ battle.player_trophies }}🏆</span><span>{{ battle.opponent_trophies }}🏆</span>
@@ -39,7 +39,7 @@
             </div>
             <p>Winner: {{ battle.winner }}</p>
             <p></p>
-            <div>
+            <div class="player_deck_container">
                 <h4>{{ battle.player }}'s Deck:</h4>
                 <div class="card-deck">
                   {% for card_url in battle.player_deck1 %}
@@ -56,7 +56,7 @@
                   {% endfor %}
                 </div>
               </div>
-              <div>
+              <div class="opponent_deck_container">
                 <h4>{{ battle.opponent }}'s Deck:</h4>
                 <div class="card-deck">
                   {% for card_url in battle.opponent_deck1 %}

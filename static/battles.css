@@ -1,63 +1,72 @@
+
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  h1{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+}
 
-  h1, h2, h3, h4 {
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .scores {
-    text-align: center;
-  }
-  
-  .scores span {
-    display: inline-block;
-    margin-right: 40px; /* Adjust the spacing as needed */
-    margin-left: 40px;
-  }
-  
-  
-  button:hover {
-    background-color: #45a049;
-  }
+h1 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
-  .card-deck {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
-  .card-container {
-    margin: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .card-container img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-  
-  hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 20px 0;
-  }
+h1, h2, h3, h4 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.scores {
+  text-align: center;
+}
+
+.scores span {
+  display: inline-block;
+  margin-right: 40px; /* Adjust the spacing as needed */
+  margin-left: 40px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 0; /* Ensures no gaps between flex items */
+}
+
+.card-container {
+  width: 90px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; /* Ensures no margins */
+  padding: 0; /* Ensures no padding */
+  box-sizing: border-box; /* Ensures padding and border are included in the total dimensions */
+}
+
+.card-container img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0; /* Ensures images have no margins */
+  padding: 0; /* Ensures images have no padding */
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}

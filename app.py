@@ -1,10 +1,16 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from battle_fetch import recBattles
 from sample_output import sample_output
 
 api_key = ''
 
 app = Flask(__name__)
+
+def remove_first_instance(string, char):
+    index = string.find(char)
+    if index != -1:
+        return string[:index] + string[index + 1:]
+    return string
 
 def get_battle_info(player_tag):
     global recent_battles
@@ -15,7 +21,9 @@ def get_battle_info(player_tag):
     
     for battle in recent_battles:
         player = battle["team"]["name"]
+        player_tag = remove_first_instance(battle["team"]["tag"], '#')
         opponent = battle["opponent"]["name"]
+        opponent_tag = remove_first_instance(battle["opponent"]["tag"], '#')
         winner = player if battle["team"]["win_status"] == "win" else opponent
         player_crowns = battle["team"]["crowns"]
         player_trophies = battle["team"]["startingTrophies"]
@@ -33,7 +41,9 @@ def get_battle_info(player_tag):
         
         battle_info = {
             "player": player,
+            "player_tag": player_tag,
             "opponent": opponent,
+            "opponent_tag": opponent_tag,
             "winner": winner,
             "player_crowns": player_crowns,
             "player_trophies": player_trophies,
@@ -60,17 +70,17 @@ def analyze():
 
 @app.route('/', methods=['GET'])
 def index():
-
     return render_template('index.html')
 
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def submit():
     player_tag = request.form['player_tag']
+    return redirect(url_for('show_battles', player_tag=player_tag))
+
+@app.route('/<player_tag>', methods=['GET'])
+def show_battles(player_tag):
     battles_info = get_battle_info(player_tag)
     return render_template('battles.html', battles=battles_info)
-
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
