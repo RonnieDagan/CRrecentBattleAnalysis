@@ -21,6 +21,7 @@ def get_battle_info(player_tag):
     battles_info = []
     
     for battle in recent_battles:
+        mode = battle["game_info"]["mode"]
         player = battle["team"]["name"]
         player_tag = remove_first_instance(battle["team"]["tag"], '#')
         opponent = battle["opponent"]["name"]
@@ -41,6 +42,7 @@ def get_battle_info(player_tag):
                 opponent_deck.append(card["iconUrl"])
         
         battle_info = {
+            "mode": mode,
             "player": player,
             "player_tag": player_tag,
             "opponent": opponent,

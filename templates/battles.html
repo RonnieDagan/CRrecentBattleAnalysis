@@ -26,12 +26,12 @@
     <h2>Recent Battles</h2>
     {% for battle in battles %}
     <div class="battle_container">
+        <h2> {{ battle.mode}}</h2>
         <h3>👑{{ battle.player_crowns }}  -  {{ battle.opponent_crowns }}👑</h3>
-        <p>Winner: {{ battle.winner }}</p>
         <div class="decks-container">
-            <div class="deck player_deck_container">
-              <span class="player_trophies">test</span>
-                <h4>{{ battle.player }}'s Deck:</h4>
+            <div class="deck-player-deck-container">
+                <h4>{{ battle.player }}</h4>
+                <span class="player-trophies">🏆{{ battle.player_trophies }}</span>
                 <div class="card-deck">
                     {% for card_url in battle.player_deck1 %}
                     <div class="card-container">
@@ -47,8 +47,9 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="deck opponent_deck_container">
-                <h4>{{ battle.opponent }}'s Deck:</h4>
+            <div class="deck-opponent-deck-container">
+                <h4>{{ battle.opponent }}</h4>
+                <span class="opponent-trophies">{{ battle.opponent_trophies }}🏆</span>
                 <div class="card-deck">
                     {% for card_url in battle.opponent_deck1 %}
                     <div class="card-container">
