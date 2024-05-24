@@ -25,55 +25,48 @@
 
     <h2>Recent Battles</h2>
     {% for battle in battles %}
-        <div>
-            <h3>👑{{ battle.player_crowns }}  -  {{ battle.opponent_crowns }}👑</h3>
-            <div class="name-trophies-container">
-              <div class="battle">
-                <span><a href="/{{ battle.player_tag }}">{{ battle.player }} </a></span>
-                <span>vs</span>
-                <span><a href="/{{ battle.opponent_tag }}">{{ battle.opponent }}</a></span>
-              </div>
-              <div class="scores">
-                <span>{{ battle.player_trophies }}🏆</span><span>{{ battle.opponent_trophies }}🏆</span>
-              </div> 
-            </div>
-            <p>Winner: {{ battle.winner }}</p>
-            <p></p>
-            <div class="player_deck_container">
+    <div class="battle_container">
+        <h3>👑{{ battle.player_crowns }}  -  {{ battle.opponent_crowns }}👑</h3>
+        <p>Winner: {{ battle.winner }}</p>
+        <div class="decks-container">
+            <div class="deck player_deck_container">
+              <span class="player_trophies">test</span>
                 <h4>{{ battle.player }}'s Deck:</h4>
                 <div class="card-deck">
-                  {% for card_url in battle.player_deck1 %}
-                  <div class="card-container">
-                    <img src="{{ card_url }}" alt="Card Image">
-                  </div>
-                  {% endfor %}
+                    {% for card_url in battle.player_deck1 %}
+                    <div class="card-container">
+                        <img src="{{ card_url }}" alt="Card Image">
+                    </div>
+                    {% endfor %}
                 </div>
                 <div class="card-deck">
-                  {% for card_url in battle.player_deck2 %}
-                  <div class="card-container">
-                    <img src="{{ card_url }}" alt="Card Image">
-                  </div>
-                  {% endfor %}
+                    {% for card_url in battle.player_deck2 %}
+                    <div class="card-container">
+                        <img src="{{ card_url }}" alt="Card Image">
+                    </div>
+                    {% endfor %}
                 </div>
-              </div>
-              <div class="opponent_deck_container">
+            </div>
+            <div class="deck opponent_deck_container">
                 <h4>{{ battle.opponent }}'s Deck:</h4>
                 <div class="card-deck">
-                  {% for card_url in battle.opponent_deck1 %}
-                  <div class="card-container">
-                    <img src="{{ card_url }}" alt="Card Image">
-                  </div>
-                  {% endfor %}
+                    {% for card_url in battle.opponent_deck1 %}
+                    <div class="card-container">
+                        <img src="{{ card_url }}" alt="Card Image">
+                    </div>
+                    {% endfor %}
                 </div>
                 <div class="card-deck">
-                  {% for card_url in battle.opponent_deck2 %}
-                  <div class="card-container">
-                    <img src="{{ card_url }}" alt="Card Image">
-                  </div>
-                  {% endfor %}
+                    {% for card_url in battle.opponent_deck2 %}
+                    <div class="card-container">
+                        <img src="{{ card_url }}" alt="Card Image">
+                    </div>
+                    {% endfor %}
                 </div>
+            </div>
         </div>
         <hr>
+    </div>
     {% endfor %}
 </body>
 </html>

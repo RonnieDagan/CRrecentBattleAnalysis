@@ -1,3 +1,4 @@
+# Todo: fix analysis
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from battle_fetch import recBattles
 from sample_output import sample_output
