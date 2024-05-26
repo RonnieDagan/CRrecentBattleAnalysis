@@ -6,13 +6,44 @@
     <title></title>
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
     <link rel="stylesheet" href="/static/home.css" type="text/css" charset="utf-8"/>
-    <h1 id="title">Clash Royale Tracker</h1>
 </head>
 <body>
-    <h2>Enter Your Clash Royale Player Tag:</h2>
-    <form method="POST">
-        <input type="text" name="player_tag" placeholder="Player Tag">
-        <input type="submit" value="Submit">
-    </form>
+    <nav>
+        <ul class="sidebar">
+          <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
+          <li><a href="#">Top Decks</a></li>
+          <li><a href="#">Tournaments</a></li>
+          <li><a href="#">Leaderboards</a></li>
+          <li><a href="#">Compare Players</a></li>
+          <li><a href="#">Deck Builder</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">Clash Royale Tracker</a></li>
+          <li class="hideOnMobile"><a href="#">Top Decks</a></li>
+          <li class="hideOnMobile"><a href="#">Tournaments</a></li>
+          <li class="hideOnMobile"><a href="#">Leaderboards</a></li>
+          <li class="hideOnMobile"><a href="#">Compare Players</a></li>
+          <li class="hideOnMobile"><a href="#">Deck Builder</a></li>
+          <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
+        </ul>
+    </nav>
+      <script>
+        function showSidebar(){
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'flex'
+        }
+        function hideSidebar(){
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'none'
+        }
+      </script>
+    <div class="body_text">
+        <h1 id="title">Clash Royale Tracker</h1>
+        <h2>Enter Your Clash Royale Player Tag:</h2>
+        <form method="POST">
+            <input type="text" name="player_tag" placeholder="Player Tag">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 </html>
