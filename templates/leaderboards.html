@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboards</title>
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    LB
+    <h1>Top Players</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Trophies</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in leaderboard %}
+            <tr>
+                <td>{{ player.rank }}</td>
+                <td>{{ player.name }}</td>
+                <td>{{ player.trophies }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

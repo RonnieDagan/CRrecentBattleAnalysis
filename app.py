@@ -1,6 +1,7 @@
 # Todo: make buttons load
 # Style Strengths, Weaknesses, etc
 # Leaderboard
+import requests
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from battle_fetch import recBattles
 from analysis import ai_analyze
@@ -11,7 +12,7 @@ strengths = ""
 summary = ""
 ptag = ""
 
-api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImE2Y2E0NmY1LWVlMDctNDU4OC1iNDZhLTg5Nzg1YTJmMmFiZCIsImlhdCI6MTcxNzAzMzM1OSwic3ViIjoiZGV2ZWxvcGVyLzc0NTYzNDA3LWZhMTQtMmQyNS0xYTIzLTMwM2Y5YWI1NTQxYyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIyMC4xNjkuMjguMjEwIl0sInR5cGUiOiJjbGllbnQifV19.hODUgwFBPTo4qBjOrApPt8ctBEvqusqNig82aPeZ1aCVBd8VR9dbi4h6eqKTK7fzX0h2PDaxNhg1ehRfH7n3fw'
+api_key = ''
 
 app = Flask(__name__)
 
@@ -47,6 +48,18 @@ def remove_first_instance(string, char):
     if index != -1:
         return string[:index] + string[index + 1:]
     return string
+
+def get_leaderboard():
+    url = 'https://api.clashroyale.com/v1/locations/global/rankings/players'
+    headers = {
+        'Accept': 'application/json',
+        'authorization': f'Bearer {api_key}'
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        return response.json()['items']
+    else:
+        return []
 
 def get_battle_info(player_tag):
     global recent_battles
@@ -138,7 +151,8 @@ def compare():
 
 @app.route('/leaderboards', methods=['GET'])
 def leaderboards():
-    return render_template('leaderboards.html')
+    leaderboard = get_leaderboard()
+    return render_template('leaderboards.html', leaderboard=leaderboard)
 
 @app.route('/<player_tag>', methods=['GET'])
 def show_battles(player_tag):

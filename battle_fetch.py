@@ -8,6 +8,8 @@ class recBattles:
     def __init__(self, API_TOKEN, PLAYER_TAG):
         self.API_TOKEN = API_TOKEN
         self.PLAYER_TAG= PLAYER_TAG
+        self.previous_team_trophies = None
+        self.previous_opponent_trophies = None
 
     def check_win(self, player_crowns, opponent_crowns):
         if player_crowns > opponent_crowns:
@@ -45,6 +47,14 @@ class recBattles:
             team_name = team[0]["name"]
             opponent_name = opponent[0]["name"]
 
+            # Get startingTrophies or use previous trophy amount if not available
+            team_starting_trophies = team[0].get("startingTrophies", self.previous_team_trophies)
+            opponent_starting_trophies = opponent[0].get("startingTrophies", self.previous_opponent_trophies)
+
+            # Update previous trophy amounts
+            self.previous_team_trophies = team_starting_trophies
+            self.previous_opponent_trophies = opponent_starting_trophies
+
             add_output = {
                 "game_info": {
                     "mode": battle["gameMode"]["name"],
@@ -53,7 +63,7 @@ class recBattles:
                 "team": {
                     "name": team_name,
                     "tag": team[0]["tag"],
-                    "startingTrophies": team[0]["startingTrophies"], 
+                    "startingTrophies": team_starting_trophies,
                     "win_status": team_win,
                     "crowns": team[0]["crowns"],
                     "deck": [],
@@ -61,7 +71,7 @@ class recBattles:
                 "opponent": {
                     "name": opponent_name,
                     "tag": opponent[0]["tag"],
-                    "startingTrophies": opponent[0]["startingTrophies"], 
+                    "startingTrophies": opponent_starting_trophies,
                     "win_status": opponent_win,
                     "crowns": opponent[0]["crowns"],
                     "deck": [],
@@ -88,5 +98,4 @@ class recBattles:
 
             output.append(add_output)
 
-            
         return output

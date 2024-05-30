@@ -12,7 +12,7 @@ import os
 
 import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyBFT1z07RMQH5DXum2hCCLhHZ592Buw24A")
+genai.configure(api_key="")
 
 # Create the model
 # See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
@@ -46,7 +46,7 @@ model = genai.GenerativeModel(
   model_name="gemini-1.5-flash",
   safety_settings=safety_settings,
   generation_config=generation_config,
-  system_instruction="you will be passed to very large lists representing two players recent battle data in the game clash royale. Compare which player is better with a small summary, take into account many factors like trophies and other things you deem fit. use https://clashroyale.fandom.com/wiki/ as u deem fit",
+  system_instruction="you will be passed to very large lists representing two players recent battle data in the game clash royale. Compare which player is better with a small summary, take into account many factors like trophies and other things you deem fit. use https://clashroyale.fandom.com/wiki/ as u deem fit please dont have any *'s because im putting this in a website",
 )
 
 chat_session = model.start_chat(

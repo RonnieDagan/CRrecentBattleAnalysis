@@ -14,7 +14,7 @@ import os
 
 import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyBFT1z07RMQH5DXum2hCCLhHZ592Buw24A")
+genai.configure(api_key="")
 
 # Create the model
 # See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
