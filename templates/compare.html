@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
-    <link rel="stylesheet" href="/static/home.css" type="text/css" charset="utf-8"/>
+    <title>Compare Players</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='battles.css') }}">
 </head>
 <body>
     <nav>
@@ -21,23 +20,21 @@
           <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
         </ul>
     </nav>
-      <script>
-        function showSidebar(){
-          const sidebar = document.querySelector('.sidebar')
-          sidebar.style.display = 'flex'
-        }
-        function hideSidebar(){
-          const sidebar = document.querySelector('.sidebar')
-          sidebar.style.display = 'none'
-        }
-      </script>
-    <div class="body_text">
-        <h1 id="title">Clash Royale Tracker</h1>
-        <h2>Enter Your Clash Royale Player Tag:</h2>
-        <form method="POST">
-            <input type="text" name="player_tag" placeholder="Player Tag">
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+    <h1>Compare Players</h1>
+    
+    <form method="post" action="/compare">
+        <label for="player1">Player 1 Tag:</label>
+        <input type="text" id="player1" name="player1" required>
+        
+        <label for="player2">Player 2 Tag:</label>
+        <input type="text" id="player2" name="player2" required>
+        
+        <button type="submit">Compare</button>
+    </form>
+
+    {% if analysis_result %}
+        <h2>Analysis Result</h2>
+        <pre>{{ analysis_result }}</pre>
+    {% endif %}
 </body>
 </html>
